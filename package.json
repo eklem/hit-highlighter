@@ -1,0 +1,27 @@
+{
+  "name": "hit-highlighter",
+  "version": "0.0.1",
+  "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eklem/hit-highlighter.git"
+  },
+  "keywords": [
+    "search",
+    "JavaScript",
+    "browser"
+  ],
+  "devDependencies": {
+    "words-n-numbers": "^2.0.0"
+  },
+  "author": "Espen Klem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eklem/hit-highlighter/issues"
+  },
+  "homepage": "https://github.com/eklem/hit-highlighter#readme"
+}
