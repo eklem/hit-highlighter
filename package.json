@@ -16,7 +16,12 @@
     "browser"
   ],
   "devDependencies": {
-    "words-n-numbers": "^2.0.0"
+    "words-n-numbers": "^2.0.0",
+    "standard": "^13.0.2",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "tape": "^4.11.0",
+    "tape-run": "^6.0.0"
   },
   "author": "Espen Klem",
   "license": "MIT",
