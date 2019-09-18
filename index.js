@@ -1,6 +1,6 @@
 // Default hightlight code object
 const defaultHighlighting = {
-  start: '<span class="hht">',
+  start: '<span class="highlighted">',
   end: '</span>'
 }
 
