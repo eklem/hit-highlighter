@@ -3,10 +3,13 @@ To be a small and simple hit highlighter for search engines running in the brows
 
 ## API
 
-### Input:
-* result String
+### highlight
+
+.hightlight([query array], [item array], highlighting)
+
 * query array
-* highlight defintion (open and closing tags or similar if markdown)
+* item array
+* highlight object
 
 ### Output:
-result string w/ tags
+Item array with highlighting tags

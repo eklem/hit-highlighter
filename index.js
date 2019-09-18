@@ -1,7 +1,7 @@
 // Default hightlight code object
 const defaultHighlighting = {
-  before: '<span class="hht">',
-  after: '</span>'
+  start: '<span class="hht">',
+  end: '</span>'
 }
 
 exports.highlight = function(query, item, highlighting) {
@@ -15,7 +15,7 @@ exports.highlight = function(query, item, highlighting) {
   for (let i = 0; i < query.length; i++) {
     for (let j = 0; j < item.length; j++) {
       if (query[i] === item[j]) {
-        item[j] = highlighting.before + item[j] + highlighting.after
+        item[j] = highlighting.start + item[j] + highlighting.end
       }
     }
   }
