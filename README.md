@@ -9,9 +9,8 @@ const hhl = require ('../index.js')
 // hhl.highlight available
 ```
 
-## API
+## Usage
 
-### highlight
 
 ```javaScript
 hightlight([query array], [item array], highlighting)
