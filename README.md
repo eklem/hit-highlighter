@@ -5,15 +5,14 @@ To be a small and simple hit highlighter for search engines running in the brows
 
 ### Node.js
 ```javaScript
-const hhl = require ('../index.js')
-// hhl.highlight available
+const highlight = require ('hit-highlight')
+// highlight available
 ```
 
 ## Usage
 
-
 ```javaScript
-hightlight([query array], [item array], highlighting)
+hightlight([query array], [item array], {highlighting})
 ```
 
 * query array
