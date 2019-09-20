@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="./mini-default.min.css">
     <link rel="stylesheet" href="./mini-additions.css">
     <script src="../dist/hit-highlighter.latest.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/words-n-numbers/dist/words-n-numbers.latest.js"></script>
     <title>Hit-highlighter browser demo</title>
   </head>
 
@@ -15,14 +14,9 @@
       <h1>Hit-highlighter demo</h1>
     </div>
 
-    <div id="addContainer">
-      <div id="item">
-        <h2>Item</h2>
-        <input type="text" id="itemtext" placeholder="Add some text, like a typical search result" /><br />
-      </div>
-
+    <div id="queryContainer">
       <div id="query">
-        <h2>Body</h2>
+        <h2>Query</h2>
         <input type="text" id="querytext" placeholder="some query words" /><br />
       </div>
     </div>
@@ -30,7 +24,6 @@
     <div id="highlighted">
       <h2>Hit highlighted</h2>
       <div id="itemWithHighlights"></div>
-      <div id="itemWithHighlightsCode"></div>
     </div>
 
     <script src="./hit-highlighter-app.js"></script>

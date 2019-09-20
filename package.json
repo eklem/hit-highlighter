@@ -1,12 +1,12 @@
 {
   "name": "hit-highlighter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
   "main": "index.js",
   "scripts": {
     "compile-for-browser": "webpack",
     "empty-sandbox": "rm -rf test/sandbox && mkdir test/sandbox",
-    "test": "standard './*.js' 'test/test.js' && npm run empty-sandbox && npm run compile-for-browser && tape ./test/test.js && cat test/sandbox/bundle.js | tape-run && rm -rf test/sandbox"
+    "test": "standard './*.js' 'test/test.js' 'demo/*.js' && npm run empty-sandbox && npm run compile-for-browser && tape ./test/test.js && cat test/sandbox/bundle.js | tape-run && rm -rf test/sandbox"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,6 @@
     "browser"
   ],
   "devDependencies": {
-    "words-n-numbers": "^2.0.0",
     "standard": "^13.0.2",
     "webpack": "^4.36.1",
     "webpack-cli": "^3.3.6",
