@@ -8,7 +8,7 @@ A small and simple hit highlighter for search engines running in the browser and
 [![JavaScript Style Guide][standardjs-image]][standardjs-url]
 
 # Browser demo
-[![Browser demo](https://user-images.githubusercontent.com/236656/65326019-c194eb00-dbb0-11e9-8414-b749cb514574.png)](https://eklem.github.io/hit-highlighter/demo/)
+[![Browser demo](https://user-images.githubusercontent.com/236656/65326686-5815dc00-dbb2-11e9-8ae0-4debc48ad293.png)](https://eklem.github.io/hit-highlighter/demo/)
 
 Check out the [interactive demo](https://eklem.github.io/hit-highlighter/demo/).
 
