@@ -26,13 +26,13 @@ const highlight = require ('hit-highlight')
 
 ## Usage
 ```javaScript
-hightlight([query array], [item array], {highlighting})
+hightlight([query array], [item array], {highlighting object})
 ```
 
 `query` and `item` are arrays of words. `hightlighting` is an object defining `start` and `end` tag for what is highlighted.
 
-`highlight.start` defaults to `<span class="highlighted">`
-`highlight.end` defaults to `</span>`
+`highlighting.start` defaults to `<span class="highlighted">`
+`highlighting.end` defaults to `</span>`
 
 
 ### Default highlighting
@@ -58,9 +58,9 @@ highlight(item, query)
 ```javaScript
 const item = ['some', 'interesting', 'words', 'to', 'remember']
 const query = ['interesting', 'words']
-const hightlight = { start: '**', end: '**' }
+const highlighting = { start: '**', end: '**' }
 
-highlight(item, query, highlight)
+highlight(item, query, highlighting)
 
 // returns:
 //[
