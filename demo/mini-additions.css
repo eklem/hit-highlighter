@@ -28,6 +28,8 @@ h2 {
 
 #highlighted p span.highlighted {
   background:#ffff00;
+  display:inline-block;
+  padding:0 7px 0 7px;
 }
 
 input {
