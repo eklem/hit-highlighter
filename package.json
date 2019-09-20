@@ -4,7 +4,9 @@
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile-for-browser": "webpack",
+    "empty-sandbox": "rm -rf test/sandbox && mkdir test/sandbox",
+    "test": "standard './*.js' 'test/test.js' && npm run empty-sandbox && npm run compile-for-browser && tape ./test/test.js && cat test/sandbox/bundle.js | tape-run && rm -rf test/sandbox"
   },
   "repository": {
     "type": "git",

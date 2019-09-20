@@ -4,8 +4,8 @@ const defaultHighlighting = {
   end: '</span>'
 }
 
-const highlight = function(query, item, highlighting) {
-  let itemHighlighted = [...item]
+const highlight = function (query, item, highlighting) {
+  const itemHighlighted = [...item]
   // Check input
   // Populate regex and options objects
   highlighting = {
@@ -17,7 +17,7 @@ const highlight = function(query, item, highlighting) {
     for (let j = 0; j < itemHighlighted.length; j++) {
       if (query[i] === itemHighlighted[j]) {
         itemHighlighted[j] = highlighting.start + itemHighlighted[j] + highlighting.end
-      } 
+      }
     }
   }
   return itemHighlighted
