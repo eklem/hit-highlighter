@@ -1,5 +1,11 @@
 # hit-highlighter
-To be a small and simple hit highlighter for search engines running in the browser and Node.js
+A small and simple hit highlighter for search engines running in the browser and Node.js
+
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+[![Build Status][travis-image]][travis-url]
+[![JavaScript Style Guide]][standardjs-image][standardjs-url]
 
 ## Initialize
 
@@ -21,3 +27,13 @@ hightlight([query array], [item array], {highlighting})
 
 ### Output:
 Item array with highlighting tags
+
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-url]: LICENSE
+[npm-url]: https://npmjs.org/package/hit-highlighting
+[npm-version-image]: http://img.shields.io/npm/v/hit-highlighting.svg?style=flat
+[npm-downloads-image]: http://img.shields.io/npm/dm/hit-highlighting.svg?style=flat
+[travis-url]: http://travis-ci.org/eklem/hit-highlighting
+[travis-image]: http://img.shields.io/travis/eklem/hit-highlighting.svg?style=flat
+[standardjs-url]: https://standardjs.com
+[standardjs-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
