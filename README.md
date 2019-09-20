@@ -31,7 +31,7 @@ Item array with highlighting tags
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
 [npm-url]: https://npmjs.org/package/hit-highlighter
-[npm-version-image]: http://img.shields.io/npm/v/hit-highlighter.svg?style=flat
+[npm-version-image]: http://img.shields.io/npm/hit-highlighter.svg?style=flat
 [npm-downloads-image]: http://img.shields.io/npm/dm/hit-highlighter.svg?style=flat
 [travis-url]: http://travis-ci.org/eklem/hit-highlighter
 [travis-image]: http://img.shields.io/travis/eklem/hit-highlighter.svg?style=flat
