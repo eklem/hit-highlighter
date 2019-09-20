@@ -1,5 +1,5 @@
 # hit-highlighter
-A small and simple hit highlighter for search engines running in the browser and Node.js
+A small and simple hit highlighter for search engines running in the browser and Node.js. Takes a query array and where the values matches within the item array, it adds hightight code.
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
@@ -9,24 +9,86 @@ A small and simple hit highlighter for search engines running in the browser and
 
 ## Initialize
 
+### Browser
+```HTML
+<script src="hit-highlighter.js"></script>
+
+<script>
+  //highlight() available
+</script>
+```
+
 ### Node.js
 ```javaScript
 const highlight = require ('hit-highlight')
-// highlight available
+// highlight() available
 ```
 
 ## Usage
-
 ```javaScript
 hightlight([query array], [item array], {highlighting})
 ```
 
-* query array
-* item array
-* highlight object
+`query` and `item` are arrays of words. `hightlighting` is an object defining `start` and `end` tag for what is highlighted.
 
-### Output:
-Item array with highlighting tags
+`highlight.start` defaults to `<span class="highlighted">`
+`highlight.end` defaults to `</span>`
+
+
+### Default highlighting
+
+```javaScript
+const item = ['some', 'interesting', 'words', 'to', 'remember']
+const query = ['interesting', 'words']
+
+highlight(item, query)
+
+// returns:
+//[
+//  'some',
+//  '<span class="highlighted">interesting</span>',
+//  '<span class="highlighted">words</span>',
+//  'to',
+//  'remember'
+//]
+```
+
+### Custom highlight.start and .end
+
+```javaScript
+const item = ['some', 'interesting', 'words', 'to', 'remember']
+const query = ['interesting', 'words']
+const hightlight = { start: '**', end: '**' }
+
+highlight(item, query, highlight)
+
+// returns:
+//[
+//  'some',
+//  '**interesting**',
+//  '**words**',
+//  'to',
+//  'remember'
+//]
+```
+
+### No hits, returing item untouched
+
+```javaScript
+const item = ['some', 'interesting', 'words', 'to', 'remember']
+const query = ['no', 'hits']
+
+highlight(item, query)
+
+// returns:
+//[
+//  'some',
+//  'interesting',
+//  'words',
+//  'to',
+//  'remember'
+//]
+```
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
