@@ -5,7 +5,7 @@ A small and simple hit highlighter for search engines running in the browser and
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![MIT License][license-image]][license-url]
 [![Build Status][travis-image]][travis-url]
-[![JavaScript Style Guide]][standardjs-image][standardjs-url]
+[![JavaScript Style Guide][standardjs-image]][standardjs-url]
 
 ## Initialize
 
