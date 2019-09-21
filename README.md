@@ -44,10 +44,10 @@ hightlight([query array], [item array], {highlighting object})
 ### Default highlighting
 
 ```javaScript
-const item = ['some', 'interesting', 'words', 'to', 'remember']
 const query = ['interesting', 'words']
+const item = ['some', 'interesting', 'words', 'to', 'remember']
 
-highlight(item, query)
+highlight(query, item)
 
 // returns:
 //[
@@ -62,11 +62,11 @@ highlight(item, query)
 ### Custom highlight.start and .end
 
 ```javaScript
-const item = ['some', 'interesting', 'words', 'to', 'remember']
 const query = ['interesting', 'words']
+const item = ['some', 'interesting', 'words', 'to', 'remember']
 const highlighting = { start: '**', end: '**' }
 
-highlight(item, query, highlighting)
+highlight(query, item, highlighting)
 
 // returns:
 //[
@@ -81,10 +81,10 @@ highlight(item, query, highlighting)
 ### No hits, returing item untouched
 
 ```javaScript
-const item = ['some', 'interesting', 'words', 'to', 'remember']
 const query = ['no', 'hits']
+const item = ['some', 'interesting', 'words', 'to', 'remember']
 
-highlight(item, query)
+highlight(query, item)
 
 // returns:
 //[
