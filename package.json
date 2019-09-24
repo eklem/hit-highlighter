@@ -1,6 +1,6 @@
 {
   "name": "hit-highlighter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
   "main": "index.js",
   "scripts": {
