@@ -23,4 +23,18 @@ const highlight = function (query, item, highlighting) {
   return itemHighlighted
 }
 
+const defaultProperties = {
+  highlightStart: '<span class="">',
+  highlightEnd: '</span>',
+  itemMaxWords: '0'
+}
+
+const newHighlight = function (query, item, properties) {
+  properties = {
+    ...defaultProperties,
+    ...properties
+  }
+}
+
 module.exports = highlight
+module.exports = newHighlight
