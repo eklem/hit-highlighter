@@ -20,9 +20,12 @@ const highlight = function (queryArr, itemArr, properties) {
     ...properties
   }
 
+  console.log('Query array: ' + JSON.stringify(queryArr))
+
   // Check if item is to be truncated
   if (itemArr.length > properties.itemMaxWords && properties.itemMaxWords !== 0) {
     properties.truncate = true
+    console.log('properties.truncate: ' + properties.truncate)
   }
 
   // Set matched words to highlightable (true)
@@ -35,17 +38,19 @@ const highlight = function (queryArr, itemArr, properties) {
       wordObj.highlightable = true
       properties.hitCount += 1
     }
-    console.log(wordObj)
+    // console.log(wordObj)
     return wordObj
   })
 
   console.log('hitCount: ' + properties.hitCount)
+  const wordPerHighlight = Math.floor(properties.itemMaxWords / properties.hitCount)
+  console.log('Truncated - Numbe of words per highlight: ' + wordPerHighlight)
 
   if (itemArr.length >= properties.itemMaxWords && properties.itemMaxWords !== 0) {
-    console.log(itemArr.length + ' >= ' + properties.itemMaxWords)
+    console.log('truncating here...')
     truncate(itemArr)
   } else {
-    console.log(itemArr.length + ' < ' + properties.itemMaxWords + ' OR itemMaxWords === 0')
+    console.log('not truncating here...')
   }
 }
 
