@@ -24,9 +24,10 @@ const highlight = function (query, item, highlighting) {
 }
 
 // const defaultProperties = {
-//   highlightStart: '<span class="">',
-//   highlightEnd: '</span>',
-//   itemMaxWords: '0'
+//  highlightStart: '<span class="">',
+//  highlightEnd: '</span>',
+//  itemMaxWords: '3',
+//  minHightlightPadding: '5'
 // }
 
 // const newHighlight = function (query, item, properties) {
@@ -35,6 +36,11 @@ const highlight = function (query, item, highlighting) {
 //     ...properties
 //   }
 // }
+
+// Checks on item
+//  if longer than maxWords
+//    --> look up all hits in item
+//    --> join hightlightAble words
 
 module.exports = highlight
 // module.exports = newHighlight
