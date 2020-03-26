@@ -19,23 +19,21 @@ const highlight = function (queryArr, itemArr, properties) {
     ...defaultProperties,
     ...properties
   }
-  // const hitArrays = []
-  // console.log('hitArrays: ' + hitArrays)
+  let hitArr = []
+  // console.log('Query array: ' + JSON.stringify(queryArr))
 
-  console.log('Query array: ' + JSON.stringify(queryArr))
-
-  // Check if item is to be truncated
+  // A: Check if item is to be truncated
   if (itemArr.length > properties.itemMaxWords && properties.itemMaxWords !== 0) {
     properties.truncate = true
     // console.log('properties.truncate: ' + properties.truncate)
   }
 
-  // Set matched words to highlightable (true)
+  // B: Set matched words to highlightable (true)
   itemArr = itemArr.map(function (itemWord, index) {
     const wordObj = {
       word: itemWord,
       highlightable: false,
-      index: index
+      index: null
     }
     if (queryArr.find(function (queryWord) { return itemWord === queryWord })) {
       wordObj.highlightable = true
@@ -45,23 +43,47 @@ const highlight = function (queryArr, itemArr, properties) {
     return wordObj
   })
 
-  // Join highlightable words
-  itemArr = itemArr.map(function (wordObj, i, itemArr) {
-    // console.log('wordObj: ' + JSON.stringify(wordObj))
-    console.log(wordObj.highlightable)
-
-    // Check if next word is highlightable and join
-    if (wordObj.highlightable && itemArr[wordObj.index - 1].highlightable) {
-      console.log('this: ' + wordObj.word)
-      console.log('prev: ' + itemArr[wordObj.index - 1].word)
-      // console.log('highlightable: ' + wordObj.index)
-      wordObj.word = itemArr[wordObj.index - 1].word + properties.space + wordObj.word
-      // remove next element from array
-      delete itemArr[wordObj.index - 1]
-      console.log('wordObj joined: ' + JSON.stringify(wordObj))
+  // C: Joining neighbour highlightable words, removing redundant and setting index value
+  for (let i = 0; i < itemArr.length; i++) {
+    console.log(i)
+    if (itemArr[i].highlightable && itemArr[i - 1].highlightable) {
+      // Joining this and previous word
+      itemArr[i].word = itemArr[i - 1].word + properties.space + itemArr[i].word
+      // Removing previous word from array
+      itemArr.splice(i - 1, 1)
+      // fixing array count
+      i = i - 1
     }
-    return wordObj
-  })
+    // setting index on all highlightable
+    if (itemArr[i].highlightable) {
+      itemArr[i].index = i
+    }
+  }
+
+  // D: Defining index on highlightable words and pushing to itemArr
+  // Need to apply highlightStart and highlightEnd
+  hitArr = itemArr.filter(itemArr => itemArr.highlightable)
+  console.log(hitArr)
+  console.log(itemArr)
+
+  // // Join highlightable words
+  // itemArr = itemArr.map(function (wordObj, i, itemArr) {
+  //   // console.log('wordObj: ' + JSON.stringify(wordObj))
+  //   // console.log(wordObj.highlightable)
+
+  //   // Check if next word is highlightable and join
+  //   if (wordObj.highlightable && itemArr[wordObj.index - 1].highlightable) {
+  //     // console.log('this: ' + wordObj.word)
+  //     // console.log('prev: ' + itemArr[wordObj.index - 1].word)
+  //     // console.log('highlightable: ' + wordObj.index)
+  //     wordObj.word = itemArr[wordObj.index - 1].word + properties.space + wordObj.word
+  //     // remove next element from array
+  //     delete itemArr[wordObj.index - 1]
+  //     // console.log('wordObj joined: ' + JSON.stringify(wordObj))
+  //     // console.log(itemArr)
+  //   }
+  //   return wordObj
+  // })
 
   console.log('hitCount: ' + properties.hitCount)
   const wordPerHighlight = Math.trunc(properties.itemMaxWords / properties.hitCount)
@@ -77,7 +99,8 @@ const highlight = function (queryArr, itemArr, properties) {
 
 // Truncating result item and padding them
 const truncate = function (itemArr) {
-  // console.log(JSON.stringify(itemArr))
+  // console.log('\n' + JSON.stringify(itemArr))
+  console.log(itemArr.length)
 }
 
 highlight(query, result, properties)
