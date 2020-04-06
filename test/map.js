@@ -5,11 +5,10 @@ const properties = { itemMaxWords: 33 }
 const defaultProperties = {
   itemMaxWords: 0,
   truncate: false,
-  truncateStart: '...',
+  truncateStart: '',
   truncateEnd: '...',
-  hitCount: 0,
   hitPaddingMin: 5,
-  highlightStart: '<span class="">',
+  highlightStart: '<span class="hitHighlight">',
   highlightEnd: '</span>',
   space: ' '
 }
@@ -20,7 +19,12 @@ const highlight = function (queryArr, itemArr, properties) {
     ...properties
   }
   let hitArr = []
-  // console.log('Query array: ' + JSON.stringify(queryArr))
+  const hitPaddedArr = []
+  let hitCount = 0
+  const hitPadding = properties.hitPaddingMin
+
+  console.log('query array: ' + queryArr)
+  console.log('result array: ' + itemArr)
 
   // A: Check if item is to be truncated
   if (itemArr.length > properties.itemMaxWords && properties.itemMaxWords !== 0) {
@@ -31,13 +35,11 @@ const highlight = function (queryArr, itemArr, properties) {
   // B: Set matched words to highlightable (true)
   itemArr = itemArr.map(function (itemWord, index) {
     const wordObj = {
-      word: itemWord,
-      highlightable: false,
-      index: null
+      word: itemWord
     }
     if (queryArr.find(function (queryWord) { return itemWord === queryWord })) {
       wordObj.highlightable = true
-      properties.hitCount += 1
+      hitCount += 1
     }
     // console.log(wordObj)
     return wordObj
@@ -45,8 +47,7 @@ const highlight = function (queryArr, itemArr, properties) {
 
   // C: Joining neighbour highlightable words, removing redundant and setting index value
   for (let i = 0; i < itemArr.length; i++) {
-    console.log(i)
-    if (itemArr[i].highlightable && itemArr[i - 1].highlightable) {
+    if (i > 0 && itemArr[i].highlightable && itemArr[i - 1].highlightable) {
       // Joining this and previous word
       itemArr[i].word = itemArr[i - 1].word + properties.space + itemArr[i].word
       // Removing previous word from array
@@ -60,47 +61,77 @@ const highlight = function (queryArr, itemArr, properties) {
     }
   }
 
+  itemArr = itemArr.map(function (itemWord, index) {
+    if (itemWord.highlightable) {
+      itemWord.word = properties.highlightStart + itemWord.word + properties.highlightEnd
+    }
+    return itemWord
+  })
+
   // D: Defining index on highlightable words and pushing to itemArr
-  // Need to apply highlightStart and highlightEnd
+  //    Adding highlightStart and highlightEnd to words / terms
   hitArr = itemArr.filter(itemArr => itemArr.highlightable)
-  console.log(hitArr)
   console.log(itemArr)
+  console.log(hitArr)
 
-  // // Join highlightable words
-  // itemArr = itemArr.map(function (wordObj, i, itemArr) {
-  //   // console.log('wordObj: ' + JSON.stringify(wordObj))
-  //   // console.log(wordObj.highlightable)
+  // E: Calculating padding array of arrays
+  //    Caluclataing how much padding
+  //    Calculate many padding arrays and/or how much padding
+  //    Join hits
+  //    Populate array
+  //    Adding truncateStart and truncateEnd to hits with padding, start is not 0 and end is not itemArr.length - 1
+  //    Stringifying & returning that string
 
-  //   // Check if next word is highlightable and join
-  //   if (wordObj.highlightable && itemArr[wordObj.index - 1].highlightable) {
-  //     // console.log('this: ' + wordObj.word)
-  //     // console.log('prev: ' + itemArr[wordObj.index - 1].word)
-  //     // console.log('highlightable: ' + wordObj.index)
-  //     wordObj.word = itemArr[wordObj.index - 1].word + properties.space + wordObj.word
-  //     // remove next element from array
-  //     delete itemArr[wordObj.index - 1]
-  //     // console.log('wordObj joined: ' + JSON.stringify(wordObj))
-  //     // console.log(itemArr)
-  //   }
-  //   return wordObj
-  // })
+  console.log('Number of hits to be padded: ' + hitArr.length)
+  console.log('Number words hit: ' + hitCount)
+  console.log('Max words per item: ' + properties.itemMaxWords)
 
-  console.log('hitCount: ' + properties.hitCount)
-  const wordPerHighlight = Math.trunc(properties.itemMaxWords / properties.hitCount)
-  console.log('Truncated - Number of words per highlight: ' + wordPerHighlight)
-
-  if (itemArr.length >= properties.itemMaxWords && properties.itemMaxWords !== 0) {
-    console.log('truncating here...')
-    truncate(itemArr)
-  } else {
-    console.log('not truncating here...')
+  // Do a minimum calculation, based on hitPaddingMin, hitArr.length and properties.itemMaxWords
+  //  If less than or equal to itemMaxWords: do one more calculation, expanding hitPadding to something sensible
+  //  !!! Should have a test on only one query word
+  //  If more than itemMaxWords: calculate how many hits to use from hitArr
+  if (hitArr.length * (hitPadding * 2) <= properties.itemMaxWords) {
+    console.log('Keep the whole hitArr with padding')
+  } else if (hitArr.length * (hitPadding * 2) > properties.itemMaxWords) {
+    console.log('We need to cut off, but how much?\nHere is some calculation:')
+    // per hit
+    const totalWords = hitArr.length * ((hitPadding * 2) + 1)
+    const wordsPerHit = (hitPadding * 2) + 1
+    const wordsToMany = totalWords - properties.itemMaxWords
+    //  how many hits to cut off
+    const hitsToKeep = hitArr.length - (Math.ceil(wordsToMany / wordsPerHit))
+    console.log('How many hits to keep: ' + hitsToKeep)
+    hitArr = hitArr.slice(0, hitsToKeep)
+    console.log(hitArr)
   }
-}
 
-// Truncating result item and padding them
-const truncate = function (itemArr) {
-  // console.log('\n' + JSON.stringify(itemArr))
-  console.log(itemArr.length)
+  // Padding etc
+  for (let i = 0; i < hitArr.length; i++) {
+    // do some padding stuff...
+    hitArr[i].paddStart = Math.max(hitArr[i].index - hitPadding, 0)
+    hitArr[i].paddEnd = Math.min(hitArr[i].index + hitPadding, itemArr.length - 1)
+  }
+  console.log(hitArr)
+
+  // finding boundaries for paddingGroups
+  for (let i = 0; i < hitArr.length; i++) {
+    if (i > 0 && hitArr[i].paddStart <= hitArr[i - 1].paddEnd) {
+      // join this and next
+      hitArr[i].paddStart = hitArr[i - 1].paddStart
+      // Removing previous padding group from index
+      hitArr.splice(i - 1, 1)
+      // fixing array count
+      i = i - 1
+      console.log('processed: ' + JSON.stringify(hitArr[i]))
+    }
+  }
+  console.log(hitArr)
+
+  // slice itemArr with info from hitArr and push to hitPaddedArr
+  for (let i = 0; i < hitArr.length; i++) {
+    hitPaddedArr[i] = itemArr.slice(hitArr[i].paddStart, hitArr[i].paddEnd)
+  }
+  console.log(hitPaddedArr)
 }
 
 highlight(query, result, properties)
