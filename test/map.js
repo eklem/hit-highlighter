@@ -1,16 +1,16 @@
-const query = ['theft', 'bob', 'dylan', 'records', 'albumet', 'bonsuplate', 'tiåret', 'columbia', 'gjennom']
+const query = ['studioalbumet', 'mottakelse', 'bedre']
 const result = ['love', 'and', 'theft', 'er', 'det', '31', 'studioalbumet', 'til', 'bob', 'dylan', 'og', 'ble', 'gitt', 'ut', 'gjennom', 'columbia', 'records', 'i', 'september', '2001', 'albumet', 'fortsatte', 'det', 'kunstneriske', 'comebacket', 'etter', 'time', 'out', 'of', 'mind', 'i', '1997', 'og', 'fekk', 'enda', 'bedre', 'mottakelse', 'enn', 'det', 'forrige', 'den', 'korrekte', 'tittelen', 'på', 'albumet', 'er', 'love', 'and', 'theft', 'med', 'engelske', 'anførselstegn', 'tittelen', 'var', 'visstnok', 'inspirert', 'av', 'en', 'bok', 'skrevet', 'av', 'historikeren', 'eric', 'lott', 'love', 'theft', 'blackface', 'minstrelsy', 'and', 'the', 'american', 'working', 'class', 'som', 'kom', 'ut', 'i', '1993', 'i', '2003', 'var', 'albumet', 'plassert', 'på', '467', 'plass', 'på', 'listen', 'til', 'rolling', 'stone', 'over', 'de', '500', 'største', 'albumene', 'noensinne', 'mens', 'newsweek', 'kåret', 'det', 'til', 'det', 'nest', 'beste', 'albumet', 'det', 'tiåret', '5', 'albumet', 'gikk', 'til', 'topps', 'i', 'norge', 'noen', 'utgaver', 'av', 'cden', 'ble', 'gitt', 'ut', 'med', 'en', 'bonusplate', 'med', 'to', 'spor', 'som', 'ikke', 'var', 'utgitt', 'før']
-const properties = { itemMaxWords: 33 }
+const properties = { itemMaxWords: 100 }
 
 const defaultProperties = {
   itemMaxWords: 0,
   truncate: false,
   truncateStart: '',
-  truncateEnd: '...',
+  truncateEnd: '... ',
   hitPaddingMin: 5,
   highlightStart: '<span class="hitHighlight">',
   highlightEnd: '</span>',
-  space: ' '
+  divider: ' '
 }
 
 const highlight = function (queryArr, itemArr, properties) {
@@ -49,7 +49,7 @@ const highlight = function (queryArr, itemArr, properties) {
   for (let i = 0; i < itemArr.length; i++) {
     if (i > 0 && itemArr[i].highlightable && itemArr[i - 1].highlightable) {
       // Joining this and previous word
-      itemArr[i].word = itemArr[i - 1].word + properties.space + itemArr[i].word
+      itemArr[i].word = itemArr[i - 1].word + properties.divider + itemArr[i].word
       // Removing previous word from array
       itemArr.splice(i - 1, 1)
       // fixing array count
@@ -109,7 +109,7 @@ const highlight = function (queryArr, itemArr, properties) {
   for (let i = 0; i < hitArr.length; i++) {
     // do some padding stuff...
     hitArr[i].paddStart = Math.max(hitArr[i].index - hitPadding, 0)
-    hitArr[i].paddEnd = Math.min(hitArr[i].index + hitPadding, itemArr.length - 1)
+    hitArr[i].paddEnd = Math.min(hitArr[i].index + hitPadding + 1, itemArr.length)
   }
   console.log(hitArr)
 
@@ -131,7 +131,22 @@ const highlight = function (queryArr, itemArr, properties) {
   for (let i = 0; i < hitArr.length; i++) {
     hitPaddedArr[i] = itemArr.slice(hitArr[i].paddStart, hitArr[i].paddEnd)
   }
-  console.log(hitPaddedArr)
+  const hit = getHighlightedString(hitPaddedArr, properties.truncateStart, properties.truncateEnd, properties.divider)
+  console.log(hit)
+}
+
+const getHighlightedString = function (hitPaddedArr, truncateStart, truncateEnd, divider) {
+  // console.log(hitPaddedArr)
+  let hitPadded = []
+  for (let i = 0; i < hitPaddedArr.length; i++) {
+    let singleHitPadded = ''
+    for (let j = 0; j < hitPaddedArr[i].length; j++) {
+      console.log(hitPaddedArr[i][j])
+      singleHitPadded += hitPaddedArr[i][j].word + divider
+    }
+    hitPadded += truncateStart + singleHitPadded + truncateEnd
+  }
+  return hitPadded
 }
 
 highlight(query, result, properties)
