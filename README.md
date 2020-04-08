@@ -1,5 +1,5 @@
 # hit-highlighter
-A small and simple hit highlighter for search engines running in the browser and Node.js. Takes a query array and where the values matches within the item array, it adds hightight code. Goes well with [words'n'numbers](https://github.com/eklem/words-n-numbers) for extracting words (and numbers) from a string of text.
+A small and simple hit highlighter for search engines running in the browser and Node.js. Language agnostic, meaning it supports all languages that can be split into words by some form of code-library. Takes a query array and where the values matches within the item array, it adds hightight code. Goes well with [words'n'numbers](https://github.com/eklem/words-n-numbers) for extracting words (and numbers) from a string of text.
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
