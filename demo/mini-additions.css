@@ -26,7 +26,7 @@ h2 {
   font-size:1.2rem;
 }
 
-#highlighted p span.highlighted {
+#highlighted p span.hitHighlight {
   background:#ffff00;
   display:inline-block;
   padding:0 7px 0 7px;

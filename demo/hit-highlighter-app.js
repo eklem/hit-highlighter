@@ -25,8 +25,8 @@ const hitHighlight = function () {
   console.log(querytext)
   console.log(itemtext)
   var hitHighlighted = window.highlight(querytext, itemtext)
-  console.log('Hit(s) highlighted: ' + hitHighlighted.join(' '))
-  populateItem(hitHighlighted.join(' '))
+  console.log('Hit(s) highlighted: ' + hitHighlighted)
+  populateItem(hitHighlighted)
 }
 
 // Empty HTML element
