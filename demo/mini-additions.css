@@ -32,8 +32,10 @@ h2 {
   padding:0 7px 0 7px;
 }
 
-input {
-  width:100%;
+input, select {
   font-size:1.2rem;
   margin-left:0;
+}
+input {
+  width:100%;
 }

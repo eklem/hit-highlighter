@@ -54,7 +54,7 @@ const highlight = function (queryArr, itemArr, properties) {
     console.log('### Case - Truncat but keep all query word hits ###')
     properties.hitPaddingMin = properties.hitPaddingMin + expandPaddingMin(hitArr.length, itemArr.length, properties)
     hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties)
-    hitArr = joinOverlappingTruncate(hitArr)
+    hitArr = joinOverlappingPadding(hitArr)
     hitTruncatedArr = truncateHitArr(hitArr, itemArr, hitTruncatedArr)
     itemHighlighted = getTruncatedHighlightedString(hitTruncatedArr, properties.truncateStart, properties.truncateEnd, properties.divider)
     return itemHighlighted
@@ -63,7 +63,7 @@ const highlight = function (queryArr, itemArr, properties) {
     console.log('### Case - Truncat and cut off some query word hits ###')
     hitArr = cutOffHitArray(hitArr, properties)
     hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties)
-    hitArr = joinOverlappingTruncate(hitArr)
+    hitArr = joinOverlappingPadding(hitArr)
     hitTruncatedArr = truncateHitArr(hitArr, itemArr, hitTruncatedArr)
     itemHighlighted = getTruncatedHighlightedString(hitTruncatedArr, properties.truncateStart, properties.truncateEnd, properties.divider)
     return itemHighlighted
@@ -163,11 +163,15 @@ const expandPaddingMin = function (hitLength, itemLength, properties) {
   return Math.floor((properties.itemMaxWords - ((hitLength * (properties.hitPaddingMin * 2)) + 1)) / hitLength / 2)
 }
 
-const joinOverlappingTruncate = function (hitArr) {
+const joinOverlappingPadding = function (hitArr) {
   for (let i = 0; i < hitArr.length; i++) {
     if (i > 0 && hitArr[i].paddStart <= hitArr[i - 1].paddEnd) {
-      // join this and next
+      // join this and previous
       hitArr[i].paddStart = hitArr[i - 1].paddStart
+      console.log('Debugging joinOverlappingPadding')
+      console.log(hitArr[i])
+      console.log(i)
+      console.log('hitArr.paddEnd: ' + hitArr[i].paddEnd)
       // Removing previous padding group from index
       hitArr.splice(i - 1, 1)
       // fixing array count

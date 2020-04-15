@@ -32,7 +32,7 @@ const hitHighlight = function () {
   // console.log(itemtext)
   // console.log(itemmaxwords)
   const hitHighlighted = window.highlight(querytext, itemtext, { itemMaxWords: itemmaxwords })
-  // console.log('Hit(s) highlighted: ' + hitHighlighted)
+  console.log('Hit(s) highlighted: ' + hitHighlighted)
   populateItem(hitHighlighted)
 }
 
