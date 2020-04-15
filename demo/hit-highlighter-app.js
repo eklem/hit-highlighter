@@ -1,7 +1,7 @@
 // Populating div with only meaningful words
 const populateItem = function (result) {
-  console.log('Boom')
-  console.log(result)
+  // console.log('Boom')
+  // console.log(result)
   const node = document.createElement('p')
   node.innerHTML = result
   emptyElement('itemWithHighlights')
@@ -18,14 +18,21 @@ document.getElementById('querytext').onkeyup = function () {
   hitHighlight()
 }
 
+// Listen to key up on headlinetext and initiate a daq-proc
+document.getElementById('maxwords').onchange = function () {
+  hitHighlight()
+}
+
 // calculate item highlighted
 const hitHighlight = function () {
-  var querytext = document.getElementById('querytext').value.split(' ')
-  var itemtext = 'some text that resembles a search result item with lots of nice words to match at least some of the query input'.split(' ')
-  console.log(querytext)
-  console.log(itemtext)
-  var hitHighlighted = window.highlight(querytext, itemtext)
-  console.log('Hit(s) highlighted: ' + hitHighlighted)
+  const querytext = document.getElementById('querytext').value.split(' ')
+  const itemtext = 'some text that resembles a search result item with lots of nice words to match at least some of the query input and we can make it longer by adding even more interesting text so that maximum words limit gets interesting'.split(' ')
+  const itemmaxwords = document.getElementById('maxwords').value
+  // console.log(querytext)
+  // console.log(itemtext)
+  // console.log(itemmaxwords)
+  const hitHighlighted = window.highlight(querytext, itemtext, { itemMaxWords: itemmaxwords })
+  // console.log('Hit(s) highlighted: ' + hitHighlighted)
   populateItem(hitHighlighted)
 }
 

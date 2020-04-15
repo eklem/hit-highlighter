@@ -13,7 +13,7 @@ h2 {
   padding-left:10px;
 }
 
-#queryContainer {
+#queryContainer, #config {
   background:#cccccc;
   padding:10px;
 }
