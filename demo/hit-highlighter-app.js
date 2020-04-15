@@ -8,17 +8,17 @@ const populateItem = function (result) {
   document.getElementById('itemWithHighlights').appendChild(node)
 }
 
-// Listen to key up on itemtext and initiate a headline parser
+// Listen to key up on itemtext and initiate a hit highlighting
 document.addEventListener('DOMContentLoaded', function (event) {
   hitHighlight()
 })
 
-// Listen to key up on querytext and initiate a headline parser
+// Listen to key up on querytext and initiate a hit highlighting
 document.getElementById('querytext').onkeyup = function () {
   hitHighlight()
 }
 
-// Listen to key up on headlinetext and initiate a daq-proc
+// Listen to change on selection input and initiate a hit highlighting
 document.getElementById('maxwords').onchange = function () {
   hitHighlight()
 }
