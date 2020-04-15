@@ -16,6 +16,9 @@ const itemLong = ['love', 'and', 'theft', 'er', 'det', '31', 'studioalbumet', 't
   'noen', 'utgaver', 'av', 'cden', 'ble', 'gitt', 'ut', 'med', 'en', 'bonusplate', 'med', 'to', 'spor', 'som', 'ikke',
   'var', 'utgitt', 'før']
 
+// Debugging: https://github.com/eklem/hit-highlighter/issues/19
+const itemBug = ['some', 'text', 'that', 'resembles', 'a', 'search', 'result', 'item', 'with', 'lots', 'of', 'nice', 'words', 'to', 'match', 'at', 'least', 'some', 'of', 'the', 'query', 'input', 'and', 'we', 'can', 'make', 'it', 'longer', 'by', 'adding', 'even', 'more', 'interesting', 'text', 'so', 'that', 'maximum', 'words', 'limit', 'gets', 'interesting']
+
 test('default highlighting', function (t) {
   t.plan(1)
   const query = ['interesting', 'words']
@@ -61,5 +64,13 @@ test('Long item, truncating, and cutoff query matches', function (t) {
   const query = ['studioalbumet', 'mottakelse', 'bedre', 'dylan', 'bob', 'working', 'class']
   const expectedResult = 'and theft er det 31 <span class="hitHighlight">studioalbumet</span> til <span class="hitHighlight">bob dylan</span> og ble gitt ut gjennom ... i 1997 og fekk enda <span class="hitHighlight">bedre mottakelse</span> enn det forrige den korrekte ... '
   const actualResult = highlight(query, itemLong, { itemMaxWords: 40 })
+  t.looseEqual(actualResult, expectedResult)
+})
+
+test('Debugging an error, truncate group with too little padding at the end', function (t) {
+  t.plan(1)
+  const query = ['some', 'query', 'words']
+  const expectedResult = '<span class="hitHighlight">some</span> text that resembles a search ... item with lots of nice <span class="hitHighlight">words</span> to match at least <span class="hitHighlight">some</span> of the <span class="hitHighlight">query</span> input and ... '
+  const actualResult = highlight(query, itemBug, { itemMaxWords: 40 })
   t.looseEqual(actualResult, expectedResult)
 })

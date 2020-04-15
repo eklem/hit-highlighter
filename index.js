@@ -132,8 +132,12 @@ const addHighlighting = function (itemArr, properties) {
 const setPaddingStartEnd = function (hitArr, itemArrLength, properties) {
   for (let i = 0; i < hitArr.length; i++) {
     // do some padding stuff...
+    // console.log('hitArr before ' + i)
+    // console.log(hitArr)
     hitArr[i].paddStart = Math.max(hitArr[i].index - properties.hitPaddingMin, 0)
     hitArr[i].paddEnd = Math.min(hitArr[i].index + properties.hitPaddingMin + 1, itemArrLength)
+    // console.log('hitArr after ' + i)
+    // console.log(hitArr)
   }
   return hitArr
 }
@@ -170,14 +174,15 @@ const joinOverlappingPadding = function (hitArr) {
       hitArr[i].paddStart = hitArr[i - 1].paddStart
       console.log('Debugging joinOverlappingPadding')
       console.log(hitArr[i])
-      console.log(i)
-      console.log('hitArr.paddEnd: ' + hitArr[i].paddEnd)
+      console.log('hitArr.paddStart : ' + hitArr[i].paddStart)
+      console.log('hitArr.paddEnd   : ' + hitArr[i].paddEnd)
       // Removing previous padding group from index
       hitArr.splice(i - 1, 1)
       // fixing array count
       i = i - 1
     }
   }
+  console.log(JSON.stringify(hitArr))
   return hitArr
 }
 
