@@ -79,9 +79,9 @@ highlight(query, item)
 ```javaScript
 const query = ['interesting', 'words']
 const item = ['some', 'interesting', 'words', 'to', 'remember']
-const highlighting = { highlightStart: '**', highlightEnd: '**' }
+const properties = { highlightStart: '**', highlightEnd: '**' }
 
-highlight(query, item, highlighting)
+highlight(query, item, properties)
 
 // returns:
 //[
