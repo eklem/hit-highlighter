@@ -66,12 +66,7 @@ const item = ['some', 'interesting', 'words', 'to', 'remember']
 highlight(query, item)
 
 // returns:
-//[
-//  'some',
-//  '<span class="hitHighlight">interesting words</span>',
-//  'to',
-//  'remember'
-//]
+// 'some <span class="hitHighlight">interesting words</span> to remember '
 ```
 
 ### Custom highlight.start and .end
@@ -84,12 +79,7 @@ const properties = { highlightStart: '**', highlightEnd: '**' }
 highlight(query, item, properties)
 
 // returns:
-//[
-//  'some',
-//  '**interesting words**',
-//  'to',
-//  'remember'
-//]
+// 'some **interesting words** to remember '
 ```
 
 ### No hits, returing item untouched
@@ -101,13 +91,7 @@ const item = ['some', 'interesting', 'words', 'to', 'remember']
 highlight(query, item)
 
 // returns:
-//[
-//  'some',
-//  'interesting',
-//  'words',
-//  'to',
-//  'remember'
-//]
+// 'some interesting words to remember '
 ```
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
