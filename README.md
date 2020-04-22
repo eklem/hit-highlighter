@@ -36,14 +36,26 @@ const highlight = require ('hit-highlight')
 
 ## Usage
 ```javaScript
-hightlight([query array], [item array], {highlighting object})
+hightlight([query array], [item array], {prpoerties})
 ```
 
-`query` and `item` are arrays of words. `hightlighting` is an object defining `start` and `end` tag for what is highlighted.
+`query` and `item` are arrays of words. `properties` is optional to define, since you have defaultProperties:
+```javaScript
+defaultProperties = {
+  itemMaxWords: 0,
+  truncateStart: '',
+  truncateEnd: '... ',
+  hitPaddingMin: 5,
+  highlightStart: '<span class="hitHighlight">',
+  highlightEnd: '</span>',
+  divider: ' '
+}
+```
 
-`highlighting.start` defaults to `<span class="highlighted">`
-`highlighting.end` defaults to `</span>`
-
+If you want to overwrite anything, i.e. maximum words to show in an item, you can do:
+```javaScript
+hightlight([query array], [item array], {itemMaxWords: 100})
+```
 
 ### Default highlighting
 
@@ -56,8 +68,7 @@ highlight(query, item)
 // returns:
 //[
 //  'some',
-//  '<span class="highlighted">interesting</span>',
-//  '<span class="highlighted">words</span>',
+//  '<span class="hitHighlight">interesting words</span>',
 //  'to',
 //  'remember'
 //]
@@ -68,15 +79,14 @@ highlight(query, item)
 ```javaScript
 const query = ['interesting', 'words']
 const item = ['some', 'interesting', 'words', 'to', 'remember']
-const highlighting = { start: '**', end: '**' }
+const highlighting = { highlightStart: '**', highlightEnd: '**' }
 
 highlight(query, item, highlighting)
 
 // returns:
 //[
 //  'some',
-//  '**interesting**',
-//  '**words**',
+//  '**interesting words**',
 //  'to',
 //  'remember'
 //]
