@@ -1,7 +1,7 @@
 const defaultProperties = {
   itemMaxWords: 0,
-  truncateStart: '',
-  truncateEnd: '... ',
+  truncateStart: '<span class="truncated">',
+  truncateEnd: '</span>',
   hitPaddingMin: 5,
   highlightStart: '<span class="hitHighlight">',
   highlightEnd: '</span>',
