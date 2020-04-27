@@ -43,8 +43,8 @@ hightlight([query array], [item array], {prpoerties})
 ```javaScript
 defaultProperties = {
   itemMaxWords: 0,
-  truncateStart: '',
-  truncateEnd: '... ',
+  truncateStart: '<span class="truncated">',
+  truncateEnd: '</span>',
   hitPaddingMin: 5,
   highlightStart: '<span class="hitHighlight">',
   highlightEnd: '</span>',
