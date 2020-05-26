@@ -34,12 +34,14 @@ h2 {
 
 .truncated {
   background:#dddddd;
-  margin-right:20px;
+  margin:5px;
   padding:3px 10px;
 }
+
 .truncated:after, .truncated:before {
   content: " ... ";
 }
+
 .truncated:last-child {
   margin-right:0;
 }
@@ -48,6 +50,7 @@ input, select {
   font-size:1.2rem;
   margin-left:0;
 }
+
 input {
   width:100%;
 }
