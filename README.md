@@ -14,7 +14,7 @@ Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a 
 # Browser demo
 [![Browser demo](https://user-images.githubusercontent.com/236656/65326930-e68a5d80-dbb2-11e9-9ad4-c5b17e53c3f4.png)](https://eklem.github.io/hit-highlighter/demo/)
 
-Check out the [interactive demo](https://eklem.github.io/hit-highlighter/demo/).
+Check out the [demo](https://eklem.github.io/hit-highlighter/demo/) to better understand how the hit-highlighter works.
 
 
 ## Initialize
