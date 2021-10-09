@@ -59,19 +59,16 @@
     // ### The highlighter "switch" ###
     // just return the highlighted itemArray
     if (!cases.hitFound) {
-      console.log('### Case - No hits ###');
       itemHighlighted = simpleTruncate(itemArr, properties);
       return itemHighlighted
 
     // just return the highlighted itemArray
     } else if (!cases.truncate) {
-      console.log('### Case - Just highlight ###');
       itemHighlighted = getHighlightedString(itemArr, properties.divider);
       return itemHighlighted
 
     // needs truncating, but keep all query words
     } else if (cases.truncate && cases.keepAllQueryWords) {
-      console.log('### Case - Truncat but keep all query word hits ###');
       properties.hitPaddingMin = properties.hitPaddingMin + expandPaddingMin(hitArr.length, itemArr.length, properties);
       hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties);
       hitArr = joinOverlappingPadding(hitArr);
@@ -81,7 +78,6 @@
 
     // needs truncadting and have to cut off query wors
     } else if (cases.truncate && !cases.keepAllQueryWords) {
-      console.log('### Case - Truncat and cut off some query word hits ###');
       hitArr = cutOffHitArray(hitArr, properties);
       hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties);
       hitArr = joinOverlappingPadding(hitArr);
