@@ -1,12 +1,13 @@
 {
   "name": "hit-highlighter",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
-  "main": "index.js",
+  "main": "./dist/hit-highlighter.cjs.js",
+  "module": "./dist/hit-highlighter.esm.mjs",
+  "browser": "./dist/hit-highlighter.umd.js",
   "scripts": {
-    "compile-for-browser": "webpack",
-    "empty-sandbox": "rm -rf test/sandbox && mkdir test/sandbox",
-    "test": "standard './*.js' 'test/test.js' 'demo/*.js' && npm run empty-sandbox && npm run compile-for-browser && tape ./test/test.js && cat test/sandbox/bundle.js | tape-run && rm -rf test/sandbox"
+    "build": "rollup --config",
+    "test": "standard './*.js' && npm run build  && npx ava ./test/test.cjs.js && ava ./test/test.esm.mjs"
   },
   "repository": {
     "type": "git",
@@ -18,15 +19,7 @@
     "browser"
   ],
   "devDependencies": {
-    "standard": "^16.0.4",
-    "webpack": "^5.50.0",
-    "webpack-cli": "^4.8.0",
-    "tape": "^5.3.1",
-    "tape-run": "^9.0.0",
-    "path-browserify": "^1.0.1",
-    "stream-browserify": "^3.0.0",
-    "process": "^0.11.10",
-    "buffer": "^6.0.3"
+    "batr": "^1.0.5"
   },
   "author": "Espen Klem",
   "license": "MIT",

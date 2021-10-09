@@ -1,5 +1,6 @@
 const defaultProperties = {
   itemMaxWords: 0,
+  returnItemAlways: true,
   truncateStart: '<span class="truncated">',
   truncateEnd: '</span>',
   hitPaddingMin: 5,
@@ -15,6 +16,7 @@ const highlight = function (queryArr, itemArr, properties) {
   }
 
   const cases = {
+    hitFound: false,
     hitCount: 0,
     truncate: false,
     keepAllQueryWords: true,
@@ -25,32 +27,44 @@ const highlight = function (queryArr, itemArr, properties) {
   let hitTruncatedArr = []
   let itemHighlighted = ''
 
-  // ### Preparing & preprocessing for hit highlighting ###
-  // A: Check if item is to be truncated
-  cases.truncate = caseTruncate(itemArr.length, properties)
+  // ######## Add a case for no hits.
+  cases.hitFound = itemArr.some(word => queryArr.includes(word))
 
-  // B: Set matched words to highlightable (true) in itemArr
-  itemArr = setHighlightables(itemArr, queryArr, cases)
+  if (cases.hitFound) {
+    // ### Preparing & preprocessing for hit highlighting ###
+    // A: Check if item is to be truncated
+    cases.truncate = caseTruncate(itemArr.length, properties)
 
-  // C: Joining neighbour highlightable words, removing redundant and setting index value
-  //    And add highlight start and end
-  itemArr = joinNeighbourHighlightable(itemArr, properties)
-  itemArr = addHighlighting(itemArr, properties)
+    // B: Set matched words to highlightable (true) in itemArr
+    itemArr = setHighlightables(itemArr, queryArr, cases)
 
-  // D: Defining index on highlightable words and pushing to hitArr
-  hitArr = itemArr.filter(itemArr => itemArr.highlightable)
+    // C: Joining neighbour highlightable words, removing redundant and setting index value
+    //    And add highlight start and end
+    itemArr = joinNeighbourHighlightable(itemArr, properties)
+    itemArr = addHighlighting(itemArr, properties)
 
-  // E: Check if to keep all query wordsCut off hit array
-  cases.keepAllQueryWords = caseKeepAllQueryWords(hitArr, properties)
+    // D: Defining index on highlightable words and pushing to hitArr
+    hitArr = itemArr.filter(itemArr => itemArr.highlightable)
+
+    // E: Check if to keep all query wordsCut off hit array
+    cases.keepAllQueryWords = caseKeepAllQueryWords(hitArr, properties)
+  }
 
   // ### The highlighter "switch" ###
-  if (!cases.truncate) {
-    // just return the highlighted itemArray
+  // just return the highlighted itemArray
+  if (!cases.hitFound) {
+    console.log('### Case - No hits ###')
+    itemHighlighted = simpleTruncate(itemArr, properties)
+    return itemHighlighted
+
+  // just return the highlighted itemArray
+  } else if (!cases.truncate) {
     console.log('### Case - Just highlight ###')
     itemHighlighted = getHighlightedString(itemArr, properties.divider)
     return itemHighlighted
+
+  // needs truncating, but keep all query words
   } else if (cases.truncate && cases.keepAllQueryWords) {
-    // needs truncating, but keep all query words
     console.log('### Case - Truncat but keep all query word hits ###')
     properties.hitPaddingMin = properties.hitPaddingMin + expandPaddingMin(hitArr.length, itemArr.length, properties)
     hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties)
@@ -58,8 +72,9 @@ const highlight = function (queryArr, itemArr, properties) {
     hitTruncatedArr = truncateHitArr(hitArr, itemArr, hitTruncatedArr)
     itemHighlighted = getTruncatedHighlightedString(hitTruncatedArr, properties.truncateStart, properties.truncateEnd, properties.divider)
     return itemHighlighted
+
+  // needs truncadting and have to cut off query wors
   } else if (cases.truncate && !cases.keepAllQueryWords) {
-    // needs truncadting and have to cut off query wors
     console.log('### Case - Truncat and cut off some query word hits ###')
     hitArr = cutOffHitArray(hitArr, properties)
     hitArr = setPaddingStartEnd(hitArr, itemArr.length, properties)
@@ -81,6 +96,18 @@ const caseTruncate = function (itemArrLength, properties, cases) {
   } else {
     return false
   }
+}
+
+// Function: just tuncate words, for when there are no hits
+const simpleTruncate = function (itemArr, properties) {
+  let item = ''
+  if (properties.itemMaxWords > 0 && itemArr.length > properties.itemMaxWords) {
+    itemArr = itemArr.slice(0, properties.itemMaxWords)
+    item = properties.truncateStart + itemArr.join(properties.divider) + properties.truncateEnd
+  } else {
+    item = itemArr.join(properties.divider)
+  }
+  return item
 }
 
 // Function: Set highlightable query words and count how many
@@ -172,17 +199,17 @@ const joinOverlappingPadding = function (hitArr) {
     if (i > 0 && hitArr[i].paddStart <= hitArr[i - 1].paddEnd) {
       // join this and previous
       hitArr[i].paddStart = hitArr[i - 1].paddStart
-      console.log('Debugging joinOverlappingPadding')
-      console.log(hitArr[i])
-      console.log('hitArr.paddStart : ' + hitArr[i].paddStart)
-      console.log('hitArr.paddEnd   : ' + hitArr[i].paddEnd)
+      // console.log('Debugging joinOverlappingPadding')
+      // console.log(hitArr[i])
+      // console.log('hitArr.paddStart : ' + hitArr[i].paddStart)
+      // console.log('hitArr.paddEnd   : ' + hitArr[i].paddEnd)
       // Removing previous padding group from index
       hitArr.splice(i - 1, 1)
       // fixing array count
       i = i - 1
     }
   }
-  console.log(JSON.stringify(hitArr))
+  // console.log(JSON.stringify(hitArr))
   return hitArr
 }
 
