@@ -27,9 +27,8 @@ test('test', pageMacro, async (t, page) => {
   // Click input#querytext
   await page.click('#querytext')
 
-  // Fill input#querytext
-  await page.fill('#querytext', 'some query words')
-  await page.keyboard.press('Enter')
+  // Type in input#querytext
+  await page.keyboard.type('some query words')
 
   // ### Ava test regular highlighting
   t.deepEqual(await page.innerHTML('#itemWithHighlights p'), '<span class="hitHighlight">some</span> text that resembles a search result item with lots of nice <span class="hitHighlight">words</span> to match at least <span class="hitHighlight">some</span> of the <span class="hitHighlight">query</span> input and we can make it longer by adding even more interesting text so that maximum <span class="hitHighlight">words</span> limit gets interesting ')
@@ -47,13 +46,12 @@ test('test', pageMacro, async (t, page) => {
   await page.click('#querytext')
 
   // Fill input#querytext with words that don't match
-  await page.fill('#querytext', 'no hits')
-  await page.keyboard.press('Enter')
+  await page.keyboard.type('no hits')
 
   // ### Ava test no hit highlight item
   t.deepEqual(await page.innerHTML('#itemWithHighlights p'), 'some text that resembles a search result item with lots of nice words to match at least some of the query input and we can make it longer by adding even more interesting text so that maximum words limit gets interesting')
 
-  // Select 40
+  // Select max 40 words again
   await page.selectOption('select#maxwords', '40')
 
   // ### Ava test no hit highlight item with truncation
