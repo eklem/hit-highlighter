@@ -1,13 +1,13 @@
 {
   "name": "hit-highlighter",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
   "main": "./dist/hit-highlighter.cjs.js",
   "module": "./dist/hit-highlighter.esm.mjs",
   "browser": "./dist/hit-highlighter.umd.js",
   "scripts": {
     "build": "rollup --config",
-    "test": "standard './*.js' && npm run build  && npx ava ./test/test.cjs.js && ava ./test/test.esm.mjs"
+    "test": "standard './*.js' && npm run build  && npx ava ./test/test.cjs.js && ava ./test/test.esm.mjs && npx ava ./test/ui-test.js"
   },
   "repository": {
     "type": "git",
