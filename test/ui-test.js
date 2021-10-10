@@ -2,7 +2,7 @@ const { chromium } = require('playwright')
 const test = require('ava')
 const browserPromise = chromium.launch({
   headless: true
-  // slowMo: 500
+  // slowMo: 100
 })
 
 const path = require('path')
@@ -42,8 +42,10 @@ test('test', pageMacro, async (t, page) => {
   // Select max 50 words again
   await page.selectOption('select#maxwords', '50')
 
-  // Click input#querytext
-  await page.click('#querytext')
+  // Click input#querytext three times to select text
+  await page.click('#querytext', {
+    clickCount: 3
+  })
 
   // Fill input#querytext with words that don't match
   await page.keyboard.type('no hits')
