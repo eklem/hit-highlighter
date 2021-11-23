@@ -19,7 +19,7 @@
     "browser"
   ],
   "devDependencies": {
-    "batr": "^1.0.8"
+    "batr": "^2.0.0"
   },
   "author": "Espen Klem",
   "license": "MIT",
