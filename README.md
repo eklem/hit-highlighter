@@ -8,7 +8,7 @@ Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
 [![MIT License][license-image]][license-url]
-[![Build Status][travis-image]][travis-url]
+[![Build Status][build-image]][build-url]
 [![JavaScript Style Guide][standardjs-image]][standardjs-url]
 
 # Browser demo
@@ -97,7 +97,7 @@ highlight(query, item)
 [npm-url]: https://npmjs.org/package/hit-highlighter
 [npm-version-image]: https://img.shields.io/npm/v/hit-highlighter.svg?style=flat
 [npm-downloads-image]: https://img.shields.io/npm/dm/hit-highlighter.svg?style=flat
-[travis-url]: https://travis-ci.org/eklem/hit-highlighter
-[travis-image]: https://img.shields.io/travis/eklem/hit-highlighter.svg?style=flat
+[build-url]: https://github.com/eklem/batr-example/actions/workflows/tests.yml
+[build-image]: https://github.com/eklem/batr-example/actions/workflows/tests.yml/badge.svg
 [standardjs-url]: https://standardjs.com
 [standardjs-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
