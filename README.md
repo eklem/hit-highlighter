@@ -7,11 +7,17 @@ Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a 
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
+[![](https://data.jsdelivr.com/v1/package/npm/hit-highlighter/badge?style=rounded)](https://www.jsdelivr.com/package/npm/hit-highlighter)
 [![MIT License][license-image]][license-url]
 [![Build Status][build-image]][build-url]
 [![JavaScript Style Guide][standardjs-image]][standardjs-url]
 
-# Browser demo
+## Breaing change
+
+API is changed, both how to import for CJS and ESM and how to reference when using `<script>` tag.
+
+## Browser demo
+
 Check out the [demo](https://eklem.github.io/hit-highlighter/demo/) to better understand how the hit-highlighter works.
 [![Browser demo](https://user-images.githubusercontent.com/236656/65326930-e68a5d80-dbb2-11e9-9ad4-c5b17e53c3f4.png)](https://eklem.github.io/hit-highlighter/demo/)
 
@@ -19,16 +25,22 @@ Check out the [demo](https://eklem.github.io/hit-highlighter/demo/) to better un
 
 ### Browser
 ```HTML
-<script src="hit-highlighter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hit-highlighter@3.0.4/dist/hit-highlighter.umd.min.js"></script>
 
 <script>
-  //highlight() available
+  //hh.highlight() available
 </script>
 ```
 
-### Node.js
+### CJS
 ```javaScript
-const highlight = require ('hit-highlight')
+const { highlight } = require ('hit-highlight')
+// highlight() available
+```
+
+### ESM
+```javaScript
+import { highlight } from 'hit-highlight'
 // highlight() available
 ```
 

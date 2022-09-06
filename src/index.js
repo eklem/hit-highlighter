@@ -240,4 +240,4 @@ const getTruncatedHighlightedString = function (hitTruncatedArr, truncateStart, 
   return hitTruncated
 }
 
-module.exports = highlight
+export { highlight }

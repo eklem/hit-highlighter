@@ -1,6 +1,6 @@
 // libraries
 import test from 'ava'
-import highlight from '../dist/hit-highlighter.cjs.js'
+import { highlight } from '../dist/hit-highlighter.cjs.js'
 
 // data
 const item = ['some', 'interesting', 'words', 'to', 'remember']

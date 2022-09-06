@@ -240,6 +240,4 @@ const getTruncatedHighlightedString = function (hitTruncatedArr, truncateStart, 
   return hitTruncated
 };
 
-var src = highlight;
-
-export { src as default };
+export { highlight };

@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.highlight = factory());
-})(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.hh = {}));
+})(this, (function (exports) { 'use strict';
 
   const defaultProperties = {
     itemMaxWords: 0,
@@ -246,8 +246,8 @@
     return hitTruncated
   };
 
-  var src = highlight;
+  exports.highlight = highlight;
 
-  return src;
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));

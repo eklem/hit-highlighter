@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 const defaultProperties = {
   itemMaxWords: 0,
   returnItemAlways: true,
@@ -242,6 +244,4 @@ const getTruncatedHighlightedString = function (hitTruncatedArr, truncateStart, 
   return hitTruncated
 };
 
-var src = highlight;
-
-module.exports = src;
+exports.highlight = highlight;

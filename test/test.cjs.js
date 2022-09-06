@@ -1,6 +1,6 @@
 // libraries
 const test = require('ava')
-const highlight = require('../dist/hit-highlighter.cjs.js')
+const { highlight } = require('../dist/hit-highlighter.cjs.js')
 
 // data
 const item = ['some', 'interesting', 'words', 'to', 'remember']

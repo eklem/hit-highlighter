@@ -1,6 +1,6 @@
 {
   "name": "hit-highlighter",
-  "version": "3.0.4",
+  "version": "4.0.0",
   "description": "Small and simple hit highlighter for search engines running in the browser and Node.js",
   "main": "./dist/hit-highlighter.cjs.js",
   "module": "./dist/hit-highlighter.esm.mjs",

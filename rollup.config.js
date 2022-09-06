@@ -10,7 +10,7 @@ export default [
   {
     input: './src/index.js',
     output: [
-      { name: 'highlight', file: pkg.browser, format: 'umd' }
+      { name: 'hh', file: pkg.browser, format: 'umd' }
     ],
     plugins: [
       resolve(), // so Rollup can find `ms`
