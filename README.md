@@ -1,9 +1,4 @@
 # hit-highlighter
-A small and versatile hit highlighter for search engines running in the browser and Node.js. Language agnostic, meaning it supports all languages that can be split into words with code. 
-
-Takes a query array and where the values matches within the search result array, it adds hightight code. Goes well with [words'n'numbers](https://github.com/eklem/words-n-numbers) for extracting words (and numbers) from a string of text.
-
-Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a hassle free document and query processor for search engines running in the browser.
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
@@ -11,6 +6,12 @@ Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a 
 [![MIT License][license-image]][license-url]
 [![Build Status][build-image]][build-url]
 [![JavaScript Style Guide][standardjs-image]][standardjs-url]
+
+A small and versatile hit highlighter for search engines running in the browser and Node.js. Language agnostic, meaning it supports all languages that can be split into words with code. 
+
+Takes a query array and where the values matches within the search result array, it adds hightight code. Goes well with [words'n'numbers](https://github.com/eklem/words-n-numbers) for extracting words (and numbers) from a string of text.
+
+Also part of [daq-proc](https://github.com/eklem/daq-proc), which is meant as a hassle free document and query processor for search engines running in the browser.
 
 ## Breaing change
 
@@ -23,9 +24,9 @@ Check out the [demo](https://eklem.github.io/hit-highlighter/demo/) to better un
 
 ## Initialize
 
-### Browser
+### UMD / Browser
 ```HTML
-<script src="https://cdn.jsdelivr.net/npm/hit-highlighter@3.0.4/dist/hit-highlighter.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hit-highlighter/dist/hit-highlighter.umd.min.js"></script>
 
 <script>
   //hh.highlight() available
