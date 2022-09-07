@@ -47,7 +47,7 @@ import { highlight } from 'hit-highlight'
 
 ## Usage
 ```javaScript
-hightlight([query array], [item array], {prpoerties})
+highlight([query array], [item array], {prpoerties})
 ```
 
 `query` and `item` are arrays of words. `properties` is optional to define, since you have defaultProperties:
